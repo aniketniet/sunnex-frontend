@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
+import { fetchHomeData, Service } from "@/lib/api";
 
 interface HeaderProps {
   onOpenContactModal?: () => void;
@@ -10,6 +11,9 @@ interface HeaderProps {
 const Header = ({ onOpenContactModal }: HeaderProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [services, setServices] = useState<Service[]>([]);
+  const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
+  const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -21,10 +25,23 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  useEffect(() => {
+    const loadServices = async () => {
+      try {
+        const data = await fetchHomeData();
+        setServices(data.data.services || []);
+      } catch (err) {
+        console.error("Failed to load services:", err);
+      }
+    };
+
+    loadServices();
+  }, []);
+
   const navLinks = [
     { name: "Home", path: "/", isHash: false },
     { name: "About", path: "/about", isHash: false },
-    { name: "Services", path: "#services", isHash: true },
+    { name: "Services", path: "#", isHash: true },
     { name: "Why Us", path: "#why-us", isHash: true },
     { name: "Contact", path: "#contact", isHash: true },
   ];
@@ -73,10 +90,14 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
     }
   };
 
+  // On home page, header is transparent until scrolled. On other pages, always show dark background
+  const isHomePage = location.pathname === "/";
+  const shouldShowBackground = isScrolled || !isHomePage;
+
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled
+        shouldShowBackground
           ? "bg-black/95 backdrop-blur-xl shadow-2xl border-b border-white/10"
           : "bg-transparent"
       }`}
@@ -104,6 +125,54 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
           <div className="hidden lg:flex items-center space-x-1">
             {navLinks.map((link) => {
               const isActive = !link.isHash && location.pathname === link.path;
+              
+              // Special handling for Services dropdown
+              if (link.name === "Services") {
+                return (
+                  <div
+                    key={link.name}
+                    className="relative group"
+                    onMouseEnter={() => setIsServicesDropdownOpen(true)}
+                    onMouseLeave={() => setIsServicesDropdownOpen(false)}
+                  >
+                    <a
+                      href={link.path}
+                      onClick={(e) => handleNavClick(e, link.path, true)}
+                      className="group relative px-4 py-2 text-white hover:text-yellow-500 transition-colors duration-300 font-medium flex items-center gap-1"
+                    >
+                      {link.name}
+                      <ChevronDown 
+                        size={16} 
+                        className={`transition-transform duration-300 ${
+                          isServicesDropdownOpen ? "rotate-180" : ""
+                        }`}
+                      />
+                      <span className={`absolute -bottom-1 left-0 h-0.5 bg-yellow-500 transition-all duration-300 ${
+                        isServicesDropdownOpen ? "w-full" : "w-0 group-hover:w-full"
+                      }`}></span>
+                    </a>
+                    
+                    {/* Dropdown Menu */}
+                    {isServicesDropdownOpen && services.length > 0 && (
+                      <div className="absolute top-full left-0 mt-2 w-64 bg-black/95 backdrop-blur-xl rounded-lg shadow-2xl border border-white/10 overflow-hidden z-50">
+                        <div className="py-2">
+                          {services.map((service) => (
+                            <Link
+                              key={service.id}
+                              to={`/services/${service.id}`}
+                              onClick={() => setIsServicesDropdownOpen(false)}
+                              className="block px-4 py-3 text-white hover:text-yellow-500 hover:bg-white/5 transition-all duration-300 font-medium"
+                            >
+                              {service.heading}
+                            </Link>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+              
               if (link.isHash) {
                 return (
                   <a
@@ -161,12 +230,50 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
         {/* Mobile Menu */}
         <div
           className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${
-            isMobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+            isMobileMenuOpen ? "max-h-[800px] opacity-100" : "max-h-0 opacity-0"
           }`}
         >
           <div className="py-4 space-y-2 bg-black/95 backdrop-blur-xl rounded-b-2xl border-t border-white/10">
             {navLinks.map((link) => {
               const isActive = !link.isHash && location.pathname === link.path;
+              
+              // Special handling for Services dropdown in mobile
+              if (link.name === "Services") {
+                return (
+                  <div key={link.name}>
+                    <button
+                      onClick={() => setIsMobileServicesOpen(!isMobileServicesOpen)}
+                      className="w-full flex items-center justify-between py-3 px-4 text-white hover:text-yellow-500 hover:bg-white/5 transition-all duration-300 font-medium rounded-lg"
+                    >
+                      <span>{link.name}</span>
+                      <ChevronDown 
+                        size={16} 
+                        className={`transition-transform duration-300 ${
+                          isMobileServicesOpen ? "rotate-180" : ""
+                        }`}
+                      />
+                    </button>
+                    {isMobileServicesOpen && services.length > 0 && (
+                      <div className="pl-4 space-y-1">
+                        {services.map((service) => (
+                          <Link
+                            key={service.id}
+                            to={`/services/${service.id}`}
+                            onClick={() => {
+                              setIsMobileServicesOpen(false);
+                              setIsMobileMenuOpen(false);
+                            }}
+                            className="block py-2 px-4 text-white/80 hover:text-yellow-500 hover:bg-white/5 transition-all duration-300 font-medium rounded-lg text-sm"
+                          >
+                            {service.heading}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              }
+              
               if (link.isHash) {
                 return (
                   <a

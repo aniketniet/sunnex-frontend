@@ -9,10 +9,13 @@ import WhyChooseUsSection from "@/components/WhyChooseUsSection";
 import ContactSection from "@/components/ContactSection";
 import InfiniteMarquee from "@/components/Brands";
 import { fetchHomeData, HomeDataResponse } from "@/lib/api";
-import { Skeleton } from "@/components/ui/skeleton";
 import ContactModal from "@/components/ContactModal";
 
-const Index = () => {
+interface IndexProps {
+  onDataLoad?: () => void;
+}
+
+const Index = ({ onDataLoad }: IndexProps) => {
   const [homeData, setHomeData] = useState<HomeDataResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
@@ -24,33 +27,24 @@ const Index = () => {
         setLoading(true);
         const data = await fetchHomeData();
         setHomeData(data);
+        // Notify parent that data is loaded
+        if (onDataLoad) {
+          onDataLoad();
+        }
       } catch (err) {
         setError("Failed to load data");
         console.error(err);
+        // Still notify parent even on error
+        if (onDataLoad) {
+          onDataLoad();
+        }
       } finally {
         setLoading(false);
       }
     };
 
     loadData();
-  }, []);
-
-  if (loading) {
-    return (
-      <div className="min-h-screen">
-        <Header />
-        <main>
-          <section className="h-screen flex items-center justify-center">
-            <div className="text-center">
-              <Skeleton className="h-12 w-64 mx-auto mb-4" />
-              <Skeleton className="h-6 w-96 mx-auto" />
-            </div>
-          </section>
-        </main>
-        <Footer />
-      </div>
-    );
-  }
+  }, [onDataLoad]);
 
   if (error || !homeData) {
     return (
