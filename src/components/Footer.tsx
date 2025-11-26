@@ -1,7 +1,25 @@
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Facebook, Youtube, Linkedin, Twitter, Instagram, Mail, Phone, MapPin } from "lucide-react";
+import { fetchHomeData, Service } from "@/lib/api";
 
 const Footer = () => {
+  const [services, setServices] = useState<Service[]>([]);
+  
+  useEffect(() => {
+    const loadServices = async () => {
+      try {
+        const data = await fetchHomeData();
+        const servicesData = data.data.services || [];
+        setServices(servicesData.slice(0, 4)); // Limit to 4 services maximum
+      } catch (err) {
+        console.error("Failed to load services:", err);
+      }
+    };
+
+    loadServices();
+  }, []);
+
   const socialLinks = [
     { icon: Facebook, href: "#", label: "Facebook" },
     { icon: Youtube, href: "#", label: "Youtube" },
@@ -10,12 +28,12 @@ const Footer = () => {
     { icon: Instagram, href: "#", label: "Instagram" },
   ];
 
-  const services = [
-    "Building Contracting",
-    "Industrial Projects",
-    "Residential Construction",
-    "Restaurant Design",
-    "Interior Design",
+  const quickLinks = [
+    { name: "Home", path: "/" },
+    { name: "About", path: "/about" },
+    // { name: "Services", path: "/#services" },
+    // { name: "Why Choose Us", path: "/#why-us" },
+    { name: "Contact", path: "/contact" },
   ];
 
   return (
@@ -50,12 +68,12 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-4">Our Services</h3>
             <ul className="space-y-2">
               {services.map((service) => (
-                <li key={service}>
+                <li key={service.id}>
                   <Link
-                    to="/services"
+                    to={`/services/${service.id}`}
                     className="text-primary-foreground/80 hover:text-accent transition-colors text-sm"
                   >
-                    {service}
+                    {service.heading}
                   </Link>
                 </li>
               ))}
@@ -66,29 +84,28 @@ const Footer = () => {
           <div>
             <h3 className="text-xl font-bold mb-4">Quick Links</h3>
             <ul className="space-y-2">
-              <li>
-                <a href="/#about" className="text-primary-foreground/80 hover:text-accent transition-colors text-sm">
-                  About Us
-                </a>
-              </li>
-              <li>
-                <a href="/#services" className="text-primary-foreground/80 hover:text-accent transition-colors text-sm">
-                  Services
-                </a>
-              </li>
-              <li>
-                <a href="/#why-us" className="text-primary-foreground/80 hover:text-accent transition-colors text-sm">
-                  Why Choose Us
-                </a>
-              </li>
+              {quickLinks.map((link) => (
+                <li key={link.name}>
+                  {link.path.startsWith("/#") ? (
+                    <a 
+                      href={link.path} 
+                      className="text-primary-foreground/80 hover:text-accent transition-colors text-sm"
+                    >
+                      {link.name}
+                    </a>
+                  ) : (
+                    <Link 
+                      to={link.path} 
+                      className="text-primary-foreground/80 hover:text-accent transition-colors text-sm"
+                    >
+                      {link.name}
+                    </Link>
+                  )}
+                </li>
+              ))}
               <li>
                 <Link to="/terms" className="text-primary-foreground/80 hover:text-accent transition-colors text-sm">
                   Terms & Conditions
-                </Link>
-              </li>
-              <li>
-                <Link to="/contact" className="text-primary-foreground/80 hover:text-accent transition-colors text-sm">
-                  Contact
                 </Link>
               </li>
             </ul>
