@@ -86,7 +86,7 @@ const YouTubeSection = ({ projects }: YouTubeSectionProps) => {
         return {
           id: project.id.toString(),
           title: project.heading,
-          thumbnail: `https://shopninja.in/pioneerv2/public/${thumbnailPath}`,
+          thumbnail: `${thumbnailPath}`,
           videoId: videoId,
           description: project.sub_heading
         };

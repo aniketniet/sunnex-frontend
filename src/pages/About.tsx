@@ -271,7 +271,7 @@ const About = () => {
                   : item.image;
                   
                 const imageUrl = item.image 
-                  ? `https://shopninja.in/pioneerv2/public/${imagePath}`
+                  ? `${imagePath}`
                   : "/placeholder-icon.png"; // Fallback placeholder image
                 
                 return (

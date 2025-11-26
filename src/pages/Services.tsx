@@ -104,7 +104,7 @@ const Services = () => {
     ? service.image.substring(1) 
     : service.image;
 
-  const imageUrl = `https://shopninja.in/pioneerv2/public/${imagePath}`;
+  const imageUrl = `${imagePath}`;
 
   return (
     <div className="min-h-screen flex flex-col">

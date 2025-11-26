@@ -26,7 +26,7 @@ const Brands = ({ brands }: BrandsProps) => {
           : brand.image;
         return {
           id: brand.id,
-          url: `https://shopninja.in/pioneerv2/public/${imagePath}`,
+          url: `${imagePath}`,
           alt: brand.name
         };
       })

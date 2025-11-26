@@ -75,10 +75,10 @@ const ClientsSection = ({ testimonials }: ClientsSectionProps) => {
         role: t.designation,
         // Fix image URL by removing leading slash if present
         image: t.image.startsWith('/') 
-          ? `https://shopninja.in/pioneerv2/public/${t.image.substring(1)}`
+          ? `${t.image.substring(1)}`
           : t.image.includes('http') 
             ? t.image 
-            : `https://shopninja.in/pioneerv2/public/${t.image}`,
+            : `${t.image}`,
         rating: t.rating || 5,
         text: t.comment
       }))

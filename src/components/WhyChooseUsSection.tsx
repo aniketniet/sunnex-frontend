@@ -74,7 +74,7 @@ const WhyChooseUsSection = ({ whyChooseUsData, coreValuesData }: WhyChooseUsSect
         return {
           title: item.heading,
           description: item.sub_heading,
-          image: `https://shopninja.in/pioneerv2/public/${imagePath}`
+          image: `${imagePath}`
         };
       })
     : staticReasons;

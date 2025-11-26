@@ -59,7 +59,7 @@ const ServicesSection = ({ services }: ServicesSectionProps) => {
           icon: Building2, // Default icon, you might want to map based on service type
           title: service.heading,
           description: service.sub_heading,
-          image: `https://shopninja.in/pioneerv2/public/${imagePath}`,
+          image: `${imagePath}`,
         };
       })
     : staticServices;
