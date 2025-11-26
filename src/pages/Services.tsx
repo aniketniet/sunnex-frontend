@@ -100,87 +100,87 @@ const Services = () => {
   }
 
   // Fix image URL by removing leading slash if present
-  const imagePath = service.image.startsWith('/') 
-    ? service.image.substring(1) 
+  const imagePath = service.image.startsWith('/')
+    ? service.image.substring(1)
     : service.image;
-
   const imageUrl = `${imagePath}`;
 
   return (
     <div className="min-h-screen flex flex-col">
       <Header onOpenContactModal={() => setIsContactModalOpen(true)} />
-      <main className="flex-1 pt-20">
-        {/* Hero Section */}
-        <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
-          <img
-            src={imageUrl}
-            alt={service.heading}
-            className="absolute inset-0 w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 to-primary/60"></div>
-          <div className="relative z-10 container mx-auto px-4 text-center animate-fade-in">
-            <h1 className="text-primary-foreground font-bold mb-4">{service.heading}</h1>
-            <p className="text-xl text-primary-foreground/90 max-w-2xl mx-auto">
-              {service.sub_heading}
-            </p>
-          </div>
-        </section>
+      <main className="flex-1 pt-24 pb-16">
+        <div className="container mx-auto px-4">
+          <Link to="/" className="inline-flex items-center text-accent hover:text-accent/80 mb-8 transition-colors">
+            <ArrowLeft className="mr-2" size={20} />
+            Back to All Services
+          </Link>
 
-        {/* Details Section */}
-        <section className="py-24 bg-background">
-          <div className="container mx-auto px-4">
-            <div className="max-w-4xl mx-auto">
-              <Link to="/" className="inline-flex items-center text-accent hover:text-accent/80 mb-8">
-                <ArrowLeft className="mr-2" size={20} />
-                Back to All Services
-              </Link>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            {/* Left Side - Image */}
+            <div className="relative rounded-2xl overflow-hidden shadow-2xl animate-fade-in group">
+              <img
+                src={imageUrl}
+                alt={service.heading}
+                className="w-full h-[400px] lg:h-[600px] object-cover group-hover:scale-105 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            </div>
 
-              <div className="space-y-8">
-                <div className="animate-slide-up">
-                  <h2 className="text-3xl font-bold text-foreground mb-6">Overview</h2>
-                  <p className="text-lg text-muted-foreground leading-relaxed">
-                    {service.overview}
+            {/* Right Side - Content */}
+            <div className="space-y-8 animate-slide-up">
+              <div>
+                <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-4 leading-tight">
+                  {service.heading}
+                </h1>
+                <p className="text-xl text-muted-foreground font-medium border-l-4 border-accent pl-4">
+                  {service.sub_heading}
+                </p>
+              </div>
+
+              <div>
+                <h2 className="text-2xl font-bold text-foreground mb-4">Overview</h2>
+                <p className="text-lg text-muted-foreground leading-relaxed">
+                  {service.overview}
+                </p>
+              </div>
+
+              <div>
+                <h2 className="text-2xl font-bold text-foreground mb-4">Key Features</h2>
+                <ul className="space-y-3">
+                  {service.features.map((feature, index) => (
+                    <li key={index} className="flex items-start space-x-3 p-3 rounded-lg hover:bg-accent/5 transition-colors border border-transparent hover:border-accent/10">
+                      <CheckCircle2 className="text-accent flex-shrink-0 mt-1" size={20} />
+                      <span className="text-muted-foreground font-medium">{feature}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="pt-6">
+                <div className="bg-primary/5 p-6 rounded-xl border border-primary/10">
+                  <h3 className="text-xl font-bold mb-2">Ready to start your project?</h3>
+                  <p className="text-muted-foreground mb-6">
+                    Contact us today to discuss your requirements and get a personalized quote.
                   </p>
-                </div>
-
-                <div className="animate-slide-up" style={{ animationDelay: "0.2s" }}>
-                  <h2 className="text-3xl font-bold text-foreground mb-6">Key Features</h2>
-                  <ul className="space-y-4">
-                    {service.features.map((feature, index) => (
-                      <li key={index} className="flex items-start space-x-3">
-                        <CheckCircle2 className="text-accent flex-shrink-0 mt-1" size={24} />
-                        <span className="text-lg text-muted-foreground">{feature}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-
-                <div className="animate-slide-up" style={{ animationDelay: "0.4s" }}>
-                  <div className="bg-primary text-primary-foreground p-8 rounded-lg">
-                    <h3 className="text-2xl font-bold mb-4">Ready to Get Started?</h3>
-                    <p className="mb-6">
-                      Contact us today to discuss your project requirements and receive a free consultation.
-                    </p>
-                    <Button 
-                      size="lg" 
-                      className="bg-accent text-accent-foreground hover:bg-accent/90"
-                      onClick={() => setIsContactModalOpen(true)}
-                    >
-                      Request a Quote
-                    </Button>
-                  </div>
+                  <Button
+                    size="lg"
+                    className="w-full sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90 text-lg px-8 py-6 h-auto shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all"
+                    onClick={() => setIsContactModalOpen(true)}
+                  >
+                    Request a Quote
+                  </Button>
                 </div>
               </div>
             </div>
           </div>
-        </section>
+        </div>
       </main>
       <Footer />
-      
+
       {/* Contact Modal */}
-      <ContactModal 
-        open={isContactModalOpen} 
-        onClose={() => setIsContactModalOpen(false)} 
+      <ContactModal
+        open={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
       />
     </div>
   );

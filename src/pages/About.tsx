@@ -67,7 +67,7 @@ const About = () => {
   if (loading) {
     return (
       <div className="min-h-screen flex flex-col">
-        <Header onOpenContactModal={() => {}} />
+        <Header onOpenContactModal={() => { }} />
         <main className="flex-1">
           <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
             <Skeleton className="absolute inset-0 w-full h-full" />
@@ -119,7 +119,7 @@ const About = () => {
 
   // Use API data if available, otherwise fallback to static data
   const content = aboutData.content || "Sunnex Technical Works LLC is a reputable, full-service contracting and construction company specializing in high-quality building, renovation, maintenance, and interior works. With extensive experience across residential, commercial, and industrial sectors, we remain dedicated to delivering durable workmanship founded on integrity, transparency, and exceptional client service.";
-  
+
   const vision = aboutData.vision || staticValues[0].description;
   const mission = aboutData.mission || staticValues[1].description;
   const values = aboutData.values || staticValues[2].description;
@@ -152,25 +152,25 @@ const About = () => {
   const whyChooseUsToDisplay = whyChooseUsData && whyChooseUsData.length > 0
     ? whyChooseUsData
     : staticValues.map((value, index) => ({
-        id: index + 1,
-        heading: value.title,
-        sub_heading: value.description,
-        image: "", // No image in static data
-        status: "active",
-        created_at: "",
-        updated_at: ""
-      }));
+      id: index + 1,
+      heading: value.title,
+      sub_heading: value.description,
+      image: "", // No image in static data
+      status: "active",
+      created_at: "",
+      updated_at: ""
+    }));
 
   // Fix image URL by removing leading slash if present
-  const imagePath = aboutData.image.startsWith('/') 
-    ? aboutData.image.substring(1) 
+  const imagePath = aboutData.image.startsWith('/')
+    ? aboutData.image.substring(1)
     : aboutData.image;
 
   const imageUrl = `https://shopninja.in/pioneerv2/public/storage/${imagePath}`;
 
   return (
     <div className="min-h-screen flex flex-col">
-      <Header onOpenContactModal={() => {}} />
+      <Header onOpenContactModal={() => { }} />
       <main className="flex-1">
         {/* Hero Section */}
         <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
@@ -266,14 +266,14 @@ const About = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
               {whyChooseUsToDisplay.map((item, index) => {
                 // Fix image URL by removing leading slash if present
-                const imagePath = item.image.startsWith('/') 
-                  ? item.image.substring(1) 
+                const imagePath = item.image.startsWith('/')
+                  ? item.image.substring(1)
                   : item.image;
-                  
-                const imageUrl = item.image 
+
+                const imageUrl = item.image
                   ? `${imagePath}`
                   : "/placeholder-icon.png"; // Fallback placeholder image
-                
+
                 return (
                   <Card
                     key={item.id}
@@ -281,9 +281,9 @@ const About = () => {
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
                     <div className="bg-gradient-to-br from-primary/20 to-accent/20 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:scale-110 transition-transform duration-300 overflow-hidden">
-                      <img 
-                        src={imageUrl} 
-                        alt={item.heading} 
+                      <img
+                        src={imageUrl}
+                        alt={item.heading}
                         className="w-8 h-8 object-contain"
                       />
                     </div>
@@ -307,17 +307,17 @@ const About = () => {
                 Let's work together to bring your vision to life. Contact us today for a free consultation and quote.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link to="/#contact">
-                  <Button 
-                    size="lg" 
+                <Link to="/contact">
+                  <Button
+                    size="lg"
                     className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                   >
                     Get in Touch
                   </Button>
                 </Link>
                 <Link to="/#services">
-                  <Button 
-                    size="lg" 
+                  <Button
+                    size="lg"
                     variant="outline"
                     className="bg-transparent border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 font-semibold px-8 py-6 text-lg rounded-full transition-all duration-300 hover:scale-105"
                   >

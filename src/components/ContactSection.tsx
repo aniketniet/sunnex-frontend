@@ -7,9 +7,10 @@ import { useToast } from "@/hooks/use-toast";
 
 interface ContactSectionProps {
   contactInfoData?: ContactInfo;
+  hideHeader?: boolean;
 }
 
-const ContactSection = ({ contactInfoData }: ContactSectionProps) => {
+const ContactSection = ({ contactInfoData, hideHeader = false }: ContactSectionProps) => {
   const { toast } = useToast();
   const [formData, setFormData] = useState({
     name: "",
@@ -39,8 +40,8 @@ const ContactSection = ({ contactInfoData }: ContactSectionProps) => {
     },
   ];
 
-  const contactInfoToDisplay = contactInfoData 
-    ? contactInfo 
+  const contactInfoToDisplay = contactInfoData
+    ? contactInfo
     : contactInfo;
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -53,7 +54,7 @@ const ContactSection = ({ contactInfoData }: ContactSectionProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Filter out empty values to make them optional
     const filteredData: ContactFormValues = {};
     Object.entries(formData).forEach(([key, value]) => {
@@ -93,12 +94,14 @@ const ContactSection = ({ contactInfoData }: ContactSectionProps) => {
     <section id="contact" className="py-24 bg-muted">
       <div className="container mx-auto px-4">
         {/* Header */}
-        <div className="text-center mb-16 animate-slide-up">
-          <h2 className="text-primary mb-4">Get In Touch</h2>
-          <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Ready to start your project? Contact us today for a free consultation
-          </p>
-        </div>
+        {!hideHeader && (
+          <div className="text-center mb-16 animate-slide-up">
+            <h2 className="text-primary mb-4">Get In Touch</h2>
+            <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
+              Ready to start your project? Contact us today for a free consultation
+            </p>
+          </div>
+        )}
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-6xl mx-auto">
           {/* Contact Info Cards */}
@@ -173,7 +176,7 @@ const ContactSection = ({ contactInfoData }: ContactSectionProps) => {
                   />
                 </div>
                 <div>
-                  <select 
+                  <select
                     name="type"
                     value={formData.type}
                     onChange={handleInputChange}
@@ -195,9 +198,9 @@ const ContactSection = ({ contactInfoData }: ContactSectionProps) => {
                     className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
                   ></textarea>
                 </div>
-                <Button 
-                  type="submit" 
-                  className="w-full bg-accent text-accent-foreground hover:bg-accent/90" 
+                <Button
+                  type="submit"
+                  className="w-full bg-accent text-accent-foreground hover:bg-accent/90"
                   size="lg"
                   disabled={isSubmitting}
                 >

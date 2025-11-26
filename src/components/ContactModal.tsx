@@ -6,7 +6,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { X } from "lucide-react";
+
 import { submitContactForm, ContactFormValues } from "@/lib/api";
 import { useToast } from "@/hooks/use-toast";
 
@@ -37,7 +37,7 @@ const ContactModal = ({ open, onClose }: ContactModalProps) => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     // Filter out empty values to make them optional
     const filteredData: ContactFormValues = {};
     Object.entries(formData).forEach(([key, value]) => {
@@ -79,14 +79,9 @@ const ContactModal = ({ open, onClose }: ContactModalProps) => {
     <Dialog open={open} onOpenChange={onClose}>
       <DialogContent className="max-w-2xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <div className="flex justify-between items-center">
-            <DialogTitle className="text-2xl font-bold text-foreground">Send Us a Message</DialogTitle>
-            <Button variant="ghost" size="icon" onClick={onClose}>
-              <X className="h-5 w-5" />
-            </Button>
-          </div>
+          <DialogTitle className="text-2xl font-bold text-foreground">Send Us a Message</DialogTitle>
         </DialogHeader>
-        
+
         <form onSubmit={handleSubmit} className="space-y-4 py-4">
           <div>
             <input
@@ -119,7 +114,7 @@ const ContactModal = ({ open, onClose }: ContactModalProps) => {
             />
           </div>
           <div>
-            <select 
+            <select
               name="type"
               value={formData.type}
               onChange={handleInputChange}
@@ -141,9 +136,9 @@ const ContactModal = ({ open, onClose }: ContactModalProps) => {
               className="w-full px-4 py-3 bg-background border border-border rounded-lg focus:outline-none focus:ring-2 focus:ring-accent"
             ></textarea>
           </div>
-          <Button 
-            type="submit" 
-            className="w-full bg-accent text-accent-foreground hover:bg-accent/90" 
+          <Button
+            type="submit"
+            className="w-full bg-accent text-accent-foreground hover:bg-accent/90"
             size="lg"
             disabled={isSubmitting}
           >

@@ -68,22 +68,22 @@ const Index = ({ onDataLoad }: IndexProps) => {
       <Header onOpenContactModal={() => setIsContactModalOpen(true)} />
       <main>
         <HeroSection />
-        <YouTubeSection projects={homeData.data.projects} />
-        <InfiniteMarquee brands={homeData.data.brands} />
         <ServicesSection services={homeData.data.services} />
+        <InfiniteMarquee brands={homeData.data.brands} />
+        <YouTubeSection projects={homeData.data.projects} />
         <ClientsSection testimonials={homeData.data.testimonials} />
-        <WhyChooseUsSection 
-          whyChooseUsData={homeData.data.why_choose_us} 
-          coreValuesData={homeData.data.our_core_values} 
+        <WhyChooseUsSection
+          whyChooseUsData={homeData.data.why_choose_us}
+          coreValuesData={homeData.data.our_core_values}
         />
         <ContactSection contactInfoData={homeData.data.contact_info} />
       </main>
       <Footer />
-      
+
       {/* Contact Modal */}
-      <ContactModal 
-        open={isContactModalOpen} 
-        onClose={() => setIsContactModalOpen(false)} 
+      <ContactModal
+        open={isContactModalOpen}
+        onClose={() => setIsContactModalOpen(false)}
       />
     </div>
   );

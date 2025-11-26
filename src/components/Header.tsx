@@ -43,26 +43,26 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
     { name: "About", path: "/about", isHash: false },
     { name: "Services", path: "#", isHash: true },
     { name: "Why Us", path: "#why-us", isHash: true },
-    { name: "Contact", path: "#contact", isHash: true },
+    { name: "Contact", path: "/contact", isHash: false },
   ];
 
   const handleNavClick = (e, path, isHash) => {
     setIsMobileMenuOpen(false);
-    
+
     // If we have a contact modal function and the path is contact, open the modal
     if (onOpenContactModal && path === "#contact") {
       e.preventDefault();
       onOpenContactModal();
       return;
     }
-    
+
     if (!isHash) {
       // For React Router links, just navigate
       return;
     }
-    
+
     e.preventDefault();
-    
+
     if (path === "#home" || path === "/") {
       if (location.pathname !== "/") {
         window.location.href = "/";
@@ -80,7 +80,7 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
           const headerOffset = 80;
           const elementPosition = element.getBoundingClientRect().top;
           const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
-          
+
           window.scrollTo({
             top: offsetPosition,
             behavior: "smooth"
@@ -96,28 +96,26 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        shouldShowBackground
-          ? "bg-black/95 backdrop-blur-xl shadow-2xl border-b border-white/10"
-          : "bg-transparent"
-      }`}
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${shouldShowBackground
+        ? "bg-black/95 backdrop-blur-xl shadow-2xl border-b border-white/10"
+        : "bg-transparent"
+        }`}
     >
       <div className="container mx-auto px-4 md:px-6">
         <nav className="flex items-center justify-between h-20">
           {/* Logo */}
-          <Link 
+          <Link
             to="/"
             className="flex items-center space-x-2 group"
           >
             <div className="text-2xl md:text-3xl font-bold tracking-tight">
-              <span className={`transition-colors duration-300 ${
-                isScrolled ? "text-white" : "text-white"
-              }`}>
+              <span className={`transition-colors duration-300 ${isScrolled ? "text-white" : "text-white"
+                }`}>
                 SUNNEX
               </span>
-              <span className="text-yellow-500 ml-1 group-hover:text-yellow-400 transition-colors duration-300">
+              {/* <span className="text-yellow-500 ml-1 group-hover:text-yellow-400 transition-colors duration-300">
                 TECH
-              </span>
+              </span> */}
             </div>
           </Link>
 
@@ -125,7 +123,7 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
           <div className="hidden lg:flex items-center space-x-1">
             {navLinks.map((link) => {
               const isActive = !link.isHash && location.pathname === link.path;
-              
+
               // Special handling for Services dropdown
               if (link.name === "Services") {
                 return (
@@ -141,17 +139,15 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
                       className="group relative px-4 py-2 text-white hover:text-yellow-500 transition-colors duration-300 font-medium flex items-center gap-1"
                     >
                       {link.name}
-                      <ChevronDown 
-                        size={16} 
-                        className={`transition-transform duration-300 ${
-                          isServicesDropdownOpen ? "rotate-180" : ""
-                        }`}
+                      <ChevronDown
+                        size={16}
+                        className={`transition-transform duration-300 ${isServicesDropdownOpen ? "rotate-180" : ""
+                          }`}
                       />
-                      <span className={`absolute -bottom-1 left-0 h-0.5 bg-yellow-500 transition-all duration-300 ${
-                        isServicesDropdownOpen ? "w-full" : "w-0 group-hover:w-full"
-                      }`}></span>
+                      <span className={`absolute -bottom-1 left-0 h-0.5 bg-yellow-500 transition-all duration-300 ${isServicesDropdownOpen ? "w-full" : "w-0 group-hover:w-full"
+                        }`}></span>
                     </a>
-                    
+
                     {/* Dropdown Menu */}
                     {isServicesDropdownOpen && services.length > 0 && (
                       <div className="absolute top-full left-0 mt-2 w-64 bg-black/95 backdrop-blur-xl rounded-lg shadow-2xl border border-white/10 overflow-hidden z-50">
@@ -172,7 +168,7 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
                   </div>
                 );
               }
-              
+
               if (link.isHash) {
                 return (
                   <a
@@ -182,9 +178,8 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
                     className="group relative px-4 py-2 text-white hover:text-yellow-500 transition-colors duration-300 font-medium"
                   >
                     {link.name}
-                    <span className={`absolute -bottom-1 left-0 h-0.5 bg-yellow-500 transition-all duration-300 ${
-                      isActive ? "w-full" : "w-0 group-hover:w-full"
-                    }`}></span>
+                    <span className={`absolute -bottom-1 left-0 h-0.5 bg-yellow-500 transition-all duration-300 ${isActive ? "w-full" : "w-0 group-hover:w-full"
+                      }`}></span>
                   </a>
                 );
               }
@@ -193,19 +188,17 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
                   key={link.name}
                   to={link.path}
                   onClick={(e) => handleNavClick(e, link.path, false)}
-                  className={`group relative px-4 py-2 transition-colors duration-300 font-medium ${
-                    isActive ? "text-yellow-500" : "text-white hover:text-yellow-500"
-                  }`}
+                  className={`group relative px-4 py-2 transition-colors duration-300 font-medium ${isActive ? "text-yellow-500" : "text-white hover:text-yellow-500"
+                    }`}
                 >
                   {link.name}
-                  <span className={`absolute -bottom-1 left-0 h-0.5 bg-yellow-500 transition-all duration-300 ${
-                    isActive ? "w-full" : "w-0 group-hover:w-full"
-                  }`}></span>
+                  <span className={`absolute -bottom-1 left-0 h-0.5 bg-yellow-500 transition-all duration-300 ${isActive ? "w-full" : "w-0 group-hover:w-full"
+                    }`}></span>
                 </Link>
               );
             })}
-            <Button 
-              size="lg" 
+            <Button
+              size="lg"
               className="bg-yellow-500 text-black hover:bg-yellow-400 font-semibold px-8 py-2.5 rounded-full shadow-lg hover:shadow-yellow-500/50 transition-all duration-300 hover:scale-105"
               onClick={onOpenContactModal}
             >
@@ -215,11 +208,10 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
 
           {/* Mobile Menu Button */}
           <button
-            className={`lg:hidden p-2 rounded-lg transition-all duration-300 ${
-              isScrolled 
-                ? "text-white hover:bg-white/10" 
-                : "text-white hover:bg-white/10"
-            }`}
+            className={`lg:hidden p-2 rounded-lg transition-all duration-300 ${isScrolled
+              ? "text-white hover:bg-white/10"
+              : "text-white hover:bg-white/10"
+              }`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -229,14 +221,13 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
 
         {/* Mobile Menu */}
         <div
-          className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${
-            isMobileMenuOpen ? "max-h-[800px] opacity-100" : "max-h-0 opacity-0"
-          }`}
+          className={`lg:hidden overflow-hidden transition-all duration-500 ease-in-out ${isMobileMenuOpen ? "max-h-[800px] opacity-100" : "max-h-0 opacity-0"
+            }`}
         >
           <div className="py-4 space-y-2 bg-black/95 backdrop-blur-xl rounded-b-2xl border-t border-white/10">
             {navLinks.map((link) => {
               const isActive = !link.isHash && location.pathname === link.path;
-              
+
               // Special handling for Services dropdown in mobile
               if (link.name === "Services") {
                 return (
@@ -246,11 +237,10 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
                       className="w-full flex items-center justify-between py-3 px-4 text-white hover:text-yellow-500 hover:bg-white/5 transition-all duration-300 font-medium rounded-lg"
                     >
                       <span>{link.name}</span>
-                      <ChevronDown 
-                        size={16} 
-                        className={`transition-transform duration-300 ${
-                          isMobileServicesOpen ? "rotate-180" : ""
-                        }`}
+                      <ChevronDown
+                        size={16}
+                        className={`transition-transform duration-300 ${isMobileServicesOpen ? "rotate-180" : ""
+                          }`}
                       />
                     </button>
                     {isMobileServicesOpen && services.length > 0 && (
@@ -273,7 +263,7 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
                   </div>
                 );
               }
-              
+
               if (link.isHash) {
                 return (
                   <a
@@ -291,19 +281,18 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
                   key={link.name}
                   to={link.path}
                   onClick={(e) => handleNavClick(e, link.path, false)}
-                  className={`block py-3 px-4 transition-all duration-300 font-medium rounded-lg ${
-                    isActive 
-                      ? "text-yellow-500 bg-white/10" 
-                      : "text-white hover:text-yellow-500 hover:bg-white/5"
-                  }`}
+                  className={`block py-3 px-4 transition-all duration-300 font-medium rounded-lg ${isActive
+                    ? "text-yellow-500 bg-white/10"
+                    : "text-white hover:text-yellow-500 hover:bg-white/5"
+                    }`}
                 >
                   {link.name}
                 </Link>
               );
             })}
             <div className="px-4 pt-2">
-              <Button 
-                size="lg" 
+              <Button
+                size="lg"
                 className="w-full bg-yellow-500 text-black hover:bg-yellow-400 font-semibold py-3 rounded-full shadow-lg hover:shadow-yellow-500/50 transition-all duration-300"
                 onClick={onOpenContactModal}
               >

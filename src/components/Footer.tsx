@@ -87,9 +87,9 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <a href="/#contact" className="text-primary-foreground/80 hover:text-accent transition-colors text-sm">
+                <Link to="/contact" className="text-primary-foreground/80 hover:text-accent transition-colors text-sm">
                   Contact
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -110,7 +110,7 @@ const Footer = () => {
               </li>
               <li className="flex items-center space-x-3">
                 <Mail size={20} className="text-accent flex-shrink-0" />
-                <span className="text-primary-foreground/80 text-sm">info@sunnextech.ae</span>
+                <span className="text-primary-foreground/80 text-sm">info@sunnex.gulf</span>
               </li>
             </ul>
           </div>
