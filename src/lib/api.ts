@@ -32,8 +32,14 @@ export interface Brand {
   updated_at: string;
 }
 
+export interface ServiceCategory {
+  id: number;
+  name: string;
+}
+
 export interface Service {
   id: number;
+  category_id: number;
   heading: string;
   sub_heading: string;
   image: string;
@@ -42,6 +48,7 @@ export interface Service {
   status: string;
   created_at: string;
   updated_at: string;
+  category: ServiceCategory;
 }
 
 export interface Testimonial {

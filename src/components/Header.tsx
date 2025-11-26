@@ -1,5 +1,5 @@
-import { useState, useEffect } from "react";
-import { Menu, X, ChevronDown } from "lucide-react";
+import { useState, useEffect, useRef } from "react";
+import { Menu, X, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
 import { fetchHomeData, Service } from "@/lib/api";
@@ -8,12 +8,37 @@ interface HeaderProps {
   onOpenContactModal?: () => void;
 }
 
+// Group services by category
+const groupServicesByCategory = (services: Service[]) => {
+  const categories: { [key: string]: { id: number; name: string; services: Service[] } } = {};
+  
+  services.forEach(service => {
+    const categoryId = service.category.id;
+    const categoryName = service.category.name;
+    
+    if (!categories[categoryId]) {
+      categories[categoryId] = {
+        id: categoryId,
+        name: categoryName,
+        services: []
+      };
+    }
+    
+    categories[categoryId].services.push(service);
+  });
+  
+  return Object.values(categories);
+};
+
 const Header = ({ onOpenContactModal }: HeaderProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [services, setServices] = useState<Service[]>([]);
+  const [groupedServices, setGroupedServices] = useState<{ id: number; name: string; services: Service[] }[]>([]);
   const [isServicesDropdownOpen, setIsServicesDropdownOpen] = useState(false);
+  const [hoveredCategory, setHoveredCategory] = useState<number | null>(null);
   const [isMobileServicesOpen, setIsMobileServicesOpen] = useState(false);
+  const hoverTimeoutRef = useRef<NodeJS.Timeout | null>(null);
   const location = useLocation();
 
   useEffect(() => {
@@ -29,7 +54,9 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
     const loadServices = async () => {
       try {
         const data = await fetchHomeData();
-        setServices(data.data.services || []);
+        const servicesData = data.data.services || [];
+        setServices(servicesData);
+        setGroupedServices(groupServicesByCategory(servicesData));
       } catch (err) {
         console.error("Failed to load services:", err);
       }
@@ -90,33 +117,52 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
     }
   };
 
-  // On home page, header is transparent until scrolled. On other pages, always show dark background
-  const isHomePage = location.pathname === "/";
-  const shouldShowBackground = isScrolled || !isHomePage;
+  // Handle category hover with delay
+  const handleCategoryMouseEnter = (categoryId: number) => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
+    }
+    setHoveredCategory(categoryId);
+  };
+
+  // Handle category mouse leave with delay
+  const handleCategoryMouseLeave = () => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
+    hoverTimeoutRef.current = setTimeout(() => {
+      setHoveredCategory(null);
+    }, 300); // 300ms delay before hiding
+  };
+
+  // Handle services list mouse enter (cancel hide timeout)
+  const handleServicesListMouseEnter = () => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+      hoverTimeoutRef.current = null;
+    }
+  };
+
+  // Handle services list mouse leave (hide with delay)
+  const handleServicesListMouseLeave = () => {
+    if (hoverTimeoutRef.current) {
+      clearTimeout(hoverTimeoutRef.current);
+    }
+    hoverTimeoutRef.current = setTimeout(() => {
+      setHoveredCategory(null);
+    }, 300); // 300ms delay before hiding
+  };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${shouldShowBackground
-        ? "bg-black/95 backdrop-blur-xl shadow-2xl border-b border-white/10"
-        : "bg-transparent"
-        }`}
-    >
-      <div className="container mx-auto px-4 md:px-6">
-        <nav className="flex items-center justify-between h-20">
+    <header className={`fixed w-full z-50 transition-all duration-300 ${isScrolled ? "bg-black/90 backdrop-blur-xl py-2 shadow-xl" : "bg-transparent py-4"
+      }`}>
+      <div className="container mx-auto px-4">
+        <nav className="flex items-center justify-between">
           {/* Logo */}
-          <Link
-            to="/"
-            className="flex items-center space-x-2 group"
-          >
-            <div className="text-2xl md:text-3xl font-bold tracking-tight">
-              <span className={`transition-colors duration-300 ${isScrolled ? "text-white" : "text-white"
-                }`}>
-                SUNNEX
-              </span>
-              {/* <span className="text-yellow-500 ml-1 group-hover:text-yellow-400 transition-colors duration-300">
-                TECH
-              </span> */}
-            </div>
+          <Link to="/" className="text-2xl font-bold">
+            <span className="text-white">SUNNEX</span>
+            <span className="text-yellow-500 ml-1">TECH</span>
           </Link>
 
           {/* Desktop Navigation */}
@@ -129,9 +175,17 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
                 return (
                   <div
                     key={link.name}
-                    className="relative group"
+                    className="relative"
                     onMouseEnter={() => setIsServicesDropdownOpen(true)}
-                    onMouseLeave={() => setIsServicesDropdownOpen(false)}
+                    onMouseLeave={() => {
+                      setIsServicesDropdownOpen(false);
+                      if (hoverTimeoutRef.current) {
+                        clearTimeout(hoverTimeoutRef.current);
+                      }
+                      hoverTimeoutRef.current = setTimeout(() => {
+                        setHoveredCategory(null);
+                      }, 300);
+                    }}
                   >
                     <a
                       href={link.path}
@@ -139,30 +193,55 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
                       className="group relative px-4 py-2 text-white hover:text-yellow-500 transition-colors duration-300 font-medium flex items-center gap-1"
                     >
                       {link.name}
-                      <ChevronDown
-                        size={16}
-                        className={`transition-transform duration-300 ${isServicesDropdownOpen ? "rotate-180" : ""
-                          }`}
-                      />
                       <span className={`absolute -bottom-1 left-0 h-0.5 bg-yellow-500 transition-all duration-300 ${isServicesDropdownOpen ? "w-full" : "w-0 group-hover:w-full"
                         }`}></span>
                     </a>
 
                     {/* Dropdown Menu */}
-                    {isServicesDropdownOpen && services.length > 0 && (
-                      <div className="absolute top-full left-0 mt-2 w-64 bg-black/95 backdrop-blur-xl rounded-lg shadow-2xl border border-white/10 overflow-hidden z-50">
-                        <div className="py-2">
-                          {services.map((service) => (
-                            <Link
-                              key={service.id}
-                              to={`/services/${service.id}`}
-                              onClick={() => setIsServicesDropdownOpen(false)}
-                              className="block px-4 py-3 text-white hover:text-yellow-500 hover:bg-white/5 transition-all duration-300 font-medium"
+                    {isServicesDropdownOpen && groupedServices.length > 0 && (
+                      <div className="absolute top-full left-0 mt-2 flex bg-black/95 backdrop-blur-xl rounded-lg shadow-2xl border border-white/10 overflow-hidden z-50">
+                        {/* Categories List */}
+                        <div className="w-64 py-2 border-r border-white/10">
+                          {groupedServices.map((category) => (
+                            <div
+                              key={category.id}
+                              className="px-4 py-3 text-white hover:text-yellow-500 hover:bg-white/5 transition-all duration-300 font-medium flex items-center justify-between cursor-pointer"
+                              onMouseEnter={() => handleCategoryMouseEnter(category.id)}
+                              onMouseLeave={handleCategoryMouseLeave}
                             >
-                              {service.heading}
-                            </Link>
+                              {category.name}
+                              <ChevronRight size={16} />
+                            </div>
                           ))}
                         </div>
+
+                        {/* Services List (shown only when a category is hovered, height auto-adjusts) */}
+                        {hoveredCategory && (
+                          <div 
+                            className="min-w-[200px] py-2 bg-black/80 flex flex-col"
+                            onMouseEnter={handleServicesListMouseEnter}
+                            onMouseLeave={handleServicesListMouseLeave}
+                          >
+                            {groupedServices
+                              .find(cat => cat.id === hoveredCategory)
+                              ?.services.map((service) => (
+                                <Link
+                                  key={service.id}
+                                  to={`/services/${service.id}`}
+                                  onClick={() => {
+                                    setIsServicesDropdownOpen(false);
+                                    setHoveredCategory(null);
+                                    if (hoverTimeoutRef.current) {
+                                      clearTimeout(hoverTimeoutRef.current);
+                                    }
+                                  }}
+                                  className="block px-4 py-3 text-white hover:text-yellow-500 hover:bg-white/5 transition-all duration-300 whitespace-nowrap"
+                                >
+                                  {service.heading}
+                                </Link>
+                              ))}
+                          </div>
+                        )}
                       </div>
                     )}
                   </div>
@@ -237,26 +316,35 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
                       className="w-full flex items-center justify-between py-3 px-4 text-white hover:text-yellow-500 hover:bg-white/5 transition-all duration-300 font-medium rounded-lg"
                     >
                       <span>{link.name}</span>
-                      <ChevronDown
+                      <ChevronRight
                         size={16}
-                        className={`transition-transform duration-300 ${isMobileServicesOpen ? "rotate-180" : ""
+                        className={`transition-transform duration-300 ${isMobileServicesOpen ? "rotate-90" : ""
                           }`}
                       />
                     </button>
-                    {isMobileServicesOpen && services.length > 0 && (
+                    {isMobileServicesOpen && groupedServices.length > 0 && (
                       <div className="pl-4 space-y-1">
-                        {services.map((service) => (
-                          <Link
-                            key={service.id}
-                            to={`/services/${service.id}`}
-                            onClick={() => {
-                              setIsMobileServicesOpen(false);
-                              setIsMobileMenuOpen(false);
-                            }}
-                            className="block py-2 px-4 text-white/80 hover:text-yellow-500 hover:bg-white/5 transition-all duration-300 font-medium rounded-lg text-sm"
-                          >
-                            {service.heading}
-                          </Link>
+                        {groupedServices.map((category) => (
+                          <div key={category.id}>
+                            <div className="px-4 py-2 text-white/90 font-medium">
+                              {category.name}
+                            </div>
+                            <div className="pl-4 space-y-1">
+                              {category.services.map((service) => (
+                                <Link
+                                  key={service.id}
+                                  to={`/services/${service.id}`}
+                                  onClick={() => {
+                                    setIsMobileServicesOpen(false);
+                                    setIsMobileMenuOpen(false);
+                                  }}
+                                  className="block py-2 px-4 text-white/80 hover:text-yellow-500 hover:bg-white/5 transition-all duration-300 font-medium rounded-lg text-sm"
+                                >
+                                  {service.heading}
+                                </Link>
+                              ))}
+                            </div>
+                          </div>
                         ))}
                       </div>
                     )}

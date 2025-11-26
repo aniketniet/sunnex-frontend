@@ -105,15 +105,36 @@ const Services = () => {
     : service.image;
   const imageUrl = `${imagePath}`;
 
+  // Create full URL for hero background
+  const heroImageUrl = `https://shopninja.in/pioneerv2/public/storage/${imagePath}`;
+
   return (
     <div className="min-h-screen flex flex-col">
       <Header onOpenContactModal={() => setIsContactModalOpen(true)} />
-      <main className="flex-1 pt-24 pb-16">
-        <div className="container mx-auto px-4">
-          <Link to="/" className="inline-flex items-center text-accent hover:text-accent/80 mb-8 transition-colors">
+      <main className="flex-1">
+        {/* Hero Section */}
+        <section className="relative h-[60vh] flex items-center justify-center overflow-hidden">
+          <img
+            src={imageUrl}
+            alt={service.heading}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-primary/60"></div>
+          <div className="relative z-10 container mx-auto px-4 text-center animate-fade-in pt-24">
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4">
+              {service.heading}
+            </h1>
+            <p className="text-xl md:text-2xl text-primary-foreground/90 max-w-3xl mx-auto">
+              {service.sub_heading}
+            </p>
+          </div>
+        </section>
+
+        <div className="container mx-auto px-4 py-16">
+          {/* <Link to="/" className="inline-flex items-center text-accent hover:text-accent/80 mb-8 transition-colors">
             <ArrowLeft className="mr-2" size={20} />
-            Back to All Services
-          </Link>
+            Back to Home
+          </Link> */}
 
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
             {/* Left Side - Image */}
@@ -128,15 +149,6 @@ const Services = () => {
 
             {/* Right Side - Content */}
             <div className="space-y-8 animate-slide-up">
-              <div>
-                <h1 className="text-4xl lg:text-5xl font-bold text-foreground mb-4 leading-tight">
-                  {service.heading}
-                </h1>
-                <p className="text-xl text-muted-foreground font-medium border-l-4 border-accent pl-4">
-                  {service.sub_heading}
-                </p>
-              </div>
-
               <div>
                 <h2 className="text-2xl font-bold text-foreground mb-4">Overview</h2>
                 <p className="text-lg text-muted-foreground leading-relaxed">
