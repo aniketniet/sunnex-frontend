@@ -3,6 +3,7 @@ import { Card } from "./ui/card";
 import { Button } from "./ui/button";
 import { Building2, Warehouse, Home, Utensils, PaintBucket, ArrowRight } from "lucide-react";
 import { Service } from "@/lib/api";
+import { useState } from "react";
 
 interface ServicesSectionProps {
   services?: Service[];
@@ -47,6 +48,12 @@ const staticServices = [
 ];
 
 const ServicesSection = ({ services }: ServicesSectionProps) => {
+  // State for showing more services
+  const [showAllServices, setShowAllServices] = useState(false);
+  
+  // Number of services to show initially
+  const initialServicesCount = 6;
+  
   // Map API services to UI format
   const servicesToDisplay = services && services.length > 0
     ? services.map(service => {
@@ -78,6 +85,11 @@ const ServicesSection = ({ services }: ServicesSectionProps) => {
     icon: getIconForService(service.title)
   }));
 
+  // Determine which services to show based on state
+  const displayedServices = showAllServices 
+    ? servicesWithIcons 
+    : servicesWithIcons.slice(0, initialServicesCount);
+
   return (
     <section id="services" className="py-24 bg-background">
       <div className="container mx-auto px-4">
@@ -91,7 +103,7 @@ const ServicesSection = ({ services }: ServicesSectionProps) => {
 
         {/* Services Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-12">
-          {servicesWithIcons.map((service, index) => (
+          {displayedServices.map((service, index) => (
             <Card
               key={service.id}
               className="overflow-hidden group hover:shadow-xl transition-all duration-300 animate-slide-up bg-card"
@@ -123,6 +135,18 @@ const ServicesSection = ({ services }: ServicesSectionProps) => {
             </Card>
           ))}
         </div>
+
+        {/* Show More Button - only show if there are more services to display */}
+        {!showAllServices && servicesWithIcons.length > initialServicesCount && (
+          <div className="text-center">
+            <Button 
+              onClick={() => setShowAllServices(true)}
+              className="bg-accent text-accent-foreground hover:bg-accent/90 px-8 py-3 text-lg"
+            >
+              Show More Services
+            </Button>
+          </div>
+        )}
       </div>
     </section>
   );
