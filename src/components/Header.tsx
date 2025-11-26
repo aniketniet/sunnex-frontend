@@ -162,7 +162,7 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
           {/* Logo */}
           <Link to="/" className="text-2xl font-bold">
             <span className="text-white">SUNNEX</span>
-            <span className="text-yellow-500 ml-1">TECH</span>
+            {/* <span className="text-yellow-500 ml-1">TECH</span> */}
           </Link>
 
           {/* Desktop Navigation */}

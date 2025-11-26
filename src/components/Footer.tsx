@@ -26,7 +26,7 @@ const Footer = () => {
           <div className="space-y-4">
             <div className="text-2xl font-bold">
               <span className="text-primary-foreground">SUNNEX</span>
-              <span className="text-accent ml-1">TECH</span>
+              {/* <span className="text-accent ml-1">TECH</span> */}
             </div>
             <p className="text-primary-foreground/80 text-sm leading-relaxed">
               Full-service contracting and construction company specializing in high-quality building, renovation, and maintenance.
@@ -120,7 +120,7 @@ const Footer = () => {
         <div className="mt-12 pt-8 border-t border-primary-foreground/20">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-primary-foreground/60 text-sm">
-              © {new Date().getFullYear()} Sunnex Technical Works LLC. All rights reserved.
+              © {new Date().getFullYear()} Sunnex LLC. All rights reserved.
             </p>
             <p className="text-primary-foreground/60 text-sm italic">
               "Let's Do It Together"
