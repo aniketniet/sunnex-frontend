@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Facebook, Youtube, Linkedin, Twitter, Instagram, Mail, Phone, MapPin } from "lucide-react";
 import { fetchHomeData, Service } from "@/lib/api";
+import Logo from "/LULLEX.svg";
 
 const Footer = () => {
   const [services, setServices] = useState<Service[]>([]);
@@ -42,9 +43,12 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Company Info */}
           <div className="space-y-4">
-            <div className="text-2xl font-bold">
-              <span className="text-primary-foreground">SUNNEX</span>
-              {/* <span className="text-accent ml-1">TECH</span> */}
+            <div className="flex items-center">
+              <img
+                src={Logo}
+                alt="Sunnex Logo"
+                className="h-16 w-auto"
+              />
             </div>
             <p className="text-primary-foreground/80 text-sm leading-relaxed">
               Full-service contracting and construction company specializing in high-quality building, renovation, and maintenance.

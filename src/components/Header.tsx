@@ -3,6 +3,7 @@ import { Menu, X, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Link, useLocation } from "react-router-dom";
 import { fetchHomeData, Service } from "@/lib/api";
+import Logo from "/LULLEX.svg";
 
 interface HeaderProps {
   onOpenContactModal?: () => void;
@@ -160,9 +161,12 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
       <div className="container mx-auto px-4">
         <nav className="flex items-center justify-between">
           {/* Logo */}
-          <Link to="/" className="text-2xl font-bold">
-            <span className="text-white">SUNNEX</span>
-            {/* <span className="text-yellow-500 ml-1">TECH</span> */}
+          <Link to="/" className="flex items-center gap-3">
+            <img
+              src={Logo}
+              alt="Sunnex Logo"
+              className="h-10 w-auto md:h-16"
+            />
           </Link>
 
           {/* Desktop Navigation */}
