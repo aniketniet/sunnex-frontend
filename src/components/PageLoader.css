@@ -21,8 +21,8 @@
 
 .spinner {
   --size: 30px;
-  --first-block-clr: #005bba;
-  --second-block-clr: #fed500;
+  --first-block-clr: #EF4028;
+  --second-block-clr: #ffffff;
   width: 100px;
   height: 100px;
   margin: 0 auto;

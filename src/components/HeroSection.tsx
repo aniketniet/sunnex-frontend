@@ -83,18 +83,18 @@ const HeroSection = () => {
                     {/* Animated Tagline */}
                     <div className="inline-block animate-fade-in opacity-0" style={{ animationDelay: "0.3s", animationFillMode: "forwards" }}>
                       <div className="flex items-center justify-center gap-3 mb-6">
-                        <div className="h-px w-16 bg-gradient-to-r from-transparent to-yellow-500"></div>
-                        <p className="text-yellow-500 font-semibold text-sm md:text-base tracking-[0.3em] uppercase">
+                        <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#EF4028]"></div>
+                        <p className="text-[#EF4028] font-semibold text-sm md:text-base tracking-[0.3em] uppercase">
                           {slide.tagline}
                         </p>
-                        <div className="h-px w-16 bg-gradient-to-l from-transparent to-yellow-500"></div>
+                        <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#EF4028]"></div>
                       </div>
                     </div>
 
                     {/* Main Title */}
                     <h1 className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl text-white font-bold leading-[1.1] tracking-tight animate-fade-in opacity-0" style={{ animationDelay: "0.5s", animationFillMode: "forwards" }}>
                       {slide.title.split(' ').map((word, i) => (
-                        <span key={i} className="inline-block hover:text-yellow-500 transition-colors duration-300">
+                        <span key={i} className="inline-block hover:text-[#EF4028] transition-colors duration-300">
                           {word}{' '}
                         </span>
                       ))}
@@ -109,7 +109,7 @@ const HeroSection = () => {
                     {/* <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-4 animate-fade-in opacity-0" style={{ animationDelay: "0.9s", animationFillMode: "forwards" }}>
                       <Button 
                         size="lg" 
-                        className="group bg-yellow-500 text-black hover:bg-yellow-400 text-base md:text-lg px-12 py-7 shadow-2xl hover:shadow-yellow-500/50 transition-all duration-500 hover:scale-105 font-semibold rounded-full"
+                        className="group bg-[#EF4028] text-white hover:bg-[#d63520] text-base md:text-lg px-12 py-7 shadow-2xl hover:shadow-[#EF4028]/50 transition-all duration-500 hover:scale-105 font-semibold rounded-full"
                       >
                         Get Started
                         <ArrowRight className="ml-2 group-hover:translate-x-1 transition-transform duration-300" size={22} />
@@ -142,7 +142,7 @@ const HeroSection = () => {
               key={index}
               className={`h-1.5 rounded-full transition-all duration-500 ${
                 index === currentSlide 
-                  ? 'w-12 bg-yellow-500 shadow-lg shadow-yellow-500/50' 
+                  ? 'w-12 bg-[#EF4028] shadow-lg shadow-[#EF4028]/50' 
                   : 'w-8 bg-white/40 hover:bg-white/60'
               }`}
               aria-label={`Go to slide ${index + 1}`}
@@ -156,7 +156,7 @@ const HeroSection = () => {
         <div className="flex flex-col items-center gap-2 animate-bounce">
           <p className="text-white/60 text-xs uppercase tracking-widest font-medium">Scroll</p>
           <div className="w-6 h-10 border-2 border-white/40 rounded-full flex items-start justify-center p-1.5 backdrop-blur-sm">
-            <div className="w-1 h-3 bg-yellow-500 rounded-full animate-pulse shadow-lg shadow-yellow-500/50"></div>
+            <div className="w-1 h-3 bg-[#EF4028] rounded-full animate-pulse shadow-lg shadow-[#EF4028]/50"></div>
           </div>
         </div>
       </div>

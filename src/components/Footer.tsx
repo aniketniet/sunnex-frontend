@@ -47,7 +47,7 @@ const Footer = () => {
               <img
                 src={Logo}
                 alt="Sunnex Logo"
-                className="h-16 w-auto"
+                className="h-24 w-auto"
               />
             </div>
             <p className="text-primary-foreground/80 text-sm leading-relaxed">

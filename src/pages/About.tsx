@@ -107,7 +107,7 @@ const About = () => {
         <main className="flex-1">
           <section className="h-screen flex items-center justify-center">
             <div className="text-center">
-              <h2 className="text-2xl font-bold text-red-500">Error loading data</h2>
+              <h2 className="text-2xl font-bold text-destructive">Error loading data</h2>
               <p className="text-muted-foreground">Please try again later</p>
             </div>
           </section>

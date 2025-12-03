@@ -93,7 +93,7 @@ const ClientsSection = ({ testimonials }: ClientsSectionProps) => {
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16 space-y-4 animate-fade-in">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
-            What Our <span className="text-primary">Clients Say</span>
+            What Our <span className="text-[#EF4028]">Clients Say</span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             Trusted by leading property owners and developers across the UAE
@@ -116,12 +116,12 @@ const ClientsSection = ({ testimonials }: ClientsSectionProps) => {
             {testimonialsToDisplay.map((testimonial, index) => (
               <CarouselItem key={testimonial.id} className="pl-4 md:basis-1/2 lg:basis-1/3">
                 <Card 
-                  className="p-8 h-full bg-card/50 backdrop-blur-sm border-2 hover:border-primary/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 animate-fade-in group"
+                  className="p-8 h-full bg-card/50 backdrop-blur-sm border-2 hover:border-[#EF4028]/50 transition-all duration-300 hover:shadow-xl hover:shadow-primary/10 animate-fade-in group"
                   style={{ animationDelay: `${index * 0.1}s` }}
                 >
                   <div className="flex flex-col h-full">
                     {/* Quote Icon */}
-                    <Quote className="w-12 h-12 text-primary/20 mb-4 group-hover:text-primary/40 transition-colors" />
+                    <Quote className="w-12 h-12 text-[#EF4028]/20 mb-4 group-hover:text-primary/40 transition-colors" />
 
                     {/* Rating */}
                     <div className="flex gap-1 mb-4">

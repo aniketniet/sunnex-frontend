@@ -88,12 +88,12 @@ const WhyChooseUsSection = ({ whyChooseUsData, coreValuesData }: WhyChooseUsSect
     : staticCoreValues;
 
   return (
-    <section id="why-us" className="py-24 bg-primary text-primary-foreground">
+    <section id="why-us" className="py-24 bg-gray-900 text-white">
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-16 animate-slide-up">
-          <h2 className="text-primary-foreground mb-4">Why Choose Us</h2>
-          <p className="text-xl text-primary-foreground/80 max-w-3xl mx-auto">
+          <h2 className="text-white mb-4">Why Choose Us</h2>
+          <p className="text-xl text-gray-300 max-w-3xl mx-auto">
             Your trusted partner for exceptional construction services
           </p>
         </div>
@@ -103,30 +103,30 @@ const WhyChooseUsSection = ({ whyChooseUsData, coreValuesData }: WhyChooseUsSect
           {reasonsToDisplay.map((reason, index) => (
             <Card
               key={reason.title}
-              className="p-8 bg-primary-foreground/10 backdrop-blur-sm border-primary-foreground/20 hover:bg-primary-foreground/20 transition-all duration-300 hover:-translate-y-2 animate-slide-up"
+              className="p-8 bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300 hover:-translate-y-2 animate-slide-up"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="bg-accent w-12 h-12 rounded-full flex items-center justify-center mb-4 overflow-hidden mx-auto">
+              <div className="bg-[#EF4028] w-12 h-12 rounded-full flex items-center justify-center mb-4 overflow-hidden mx-auto">
                 <img 
                   src={reason.image} 
                   alt={reason.title} 
                   className="w-8 h-8 object-contain"
                 />
               </div>
-              <h3 className="text-2xl font-bold text-primary-foreground mb-3 text-center">{reason.title}</h3>
-              <p className="text-primary-foreground/80 text-center">{reason.description}</p>
+              <h3 className="text-2xl font-bold text-white mb-3 text-center">{reason.title}</h3>
+              <p className="text-gray-300 text-center">{reason.description}</p>
             </Card>
           ))}
         </div>
 
         {/* Core Values Section */}
-        <div className="mt-16 p-8 bg-primary-foreground/10 backdrop-blur-sm rounded-lg animate-slide-up">
-          <h3 className="text-3xl font-bold text-primary-foreground mb-6 text-center">Our Core Values</h3>
+        <div className="mt-16 p-8 bg-white/10 backdrop-blur-sm rounded-lg animate-slide-up">
+          <h3 className="text-3xl font-bold text-white mb-6 text-center">Our Core Values</h3>
           <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 text-center">
             {coreValuesToDisplay.map((value, index) => (
               <div key={value.title}>
-                <h4 className="text-xl font-bold text-accent mb-2">{value.title}</h4>
-                <p className="text-primary-foreground/80 text-sm">
+                <h4 className="text-xl font-bold text-[#EF4028] mb-2">{value.title}</h4>
+                <p className="text-gray-300 text-sm">
                   {value.description}
                 </p>
               </div>
