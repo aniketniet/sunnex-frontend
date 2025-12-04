@@ -84,7 +84,7 @@ const HeroSection = () => {
                     <div className="inline-block animate-fade-in opacity-0" style={{ animationDelay: "0.3s", animationFillMode: "forwards" }}>
                       <div className="flex items-center justify-center gap-3 mb-6">
                         <div className="h-px w-16 bg-gradient-to-r from-transparent to-[#da0530]"></div>
-                        <p className="text-[#da0530] font-semibold text-sm md:text-base tracking-[0.3em] uppercase">
+                        <p className="text-white font-semibold text-sm md:text-base tracking-[0.3em] uppercase">
                           {slide.tagline}
                         </p>
                         <div className="h-px w-16 bg-gradient-to-l from-transparent to-[#da0530]"></div>
