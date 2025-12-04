@@ -78,8 +78,8 @@ const HeroSection = () => {
                 </div>
 
                 {/* Content */}
-                <div className="relative z-10 container mx-auto px-4 text-center">
-                  <div className="max-w-6xl mx-auto space-y-10">
+                <div className="relative z-10 container mx-auto px-4 text-center justify-start flex h-full items-center">
+                  <div className="max-w-6xl mx-auto space-y-10 h-[60vh]">
                     {/* Animated Tagline */}
                     <div className="inline-block animate-fade-in opacity-0" style={{ animationDelay: "0.3s", animationFillMode: "forwards" }}>
                       <div className="flex items-center justify-center gap-3 mb-6">
@@ -92,18 +92,18 @@ const HeroSection = () => {
                     </div>
 
                     {/* Main Title */}
-                    <h1 className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl text-white font-bold leading-[1.1] tracking-tight animate-fade-in opacity-0" style={{ animationDelay: "0.5s", animationFillMode: "forwards" }}>
+                    {/* <h1 className="text-5xl md:text-7xl lg:text-8xl xl:text-9xl text-white font-bold leading-[1.1] tracking-tight animate-fade-in opacity-0" style={{ animationDelay: "0.5s", animationFillMode: "forwards" }}>
                       {slide.title.split(' ').map((word, i) => (
                         <span key={i} className="inline-block hover:text-[#da0530] transition-colors duration-300">
                           {word}{' '}
                         </span>
                       ))}
-                    </h1>
+                    </h1> */}
 
                     {/* Description */}
-                    <p className="text-lg md:text-xl lg:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed animate-fade-in opacity-0" style={{ animationDelay: "0.7s", animationFillMode: "forwards" }}>
+                    {/* <p className="text-lg md:text-xl lg:text-2xl text-gray-300 max-w-4xl mx-auto leading-relaxed animate-fade-in opacity-0" style={{ animationDelay: "0.7s", animationFillMode: "forwards" }}>
                       {slide.description}
-                    </p>
+                    </p> */}
 
                     {/* CTA Buttons */}
                     {/* <div className="flex flex-col sm:flex-row gap-6 justify-center items-center pt-4 animate-fade-in opacity-0" style={{ animationDelay: "0.9s", animationFillMode: "forwards" }}>
@@ -136,7 +136,7 @@ const HeroSection = () => {
         {/* <CarouselNext className="right-4 md:right-10 h-14 w-14 bg-white/10 backdrop-blur-xl border-white/20 text-white hover:bg-white/20 transition-all duration-300 rounded-full shadow-2xl hover:scale-110" /> */}
         
         {/* Slide Indicators */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-3">
+        {/* <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-3">
           {slides.map((_, index) => (
             <button
               key={index}
@@ -148,18 +148,18 @@ const HeroSection = () => {
               aria-label={`Go to slide ${index + 1}`}
             />
           ))}
-        </div>
+        </div> */}
       </Carousel>
 
       {/* Animated Scroll Indicator */}
-      <div className="absolute bottom-14 left-1/2 transform -translate-x-1/2 z-20">
+      {/* <div className="absolute bottom-14 left-1/2 transform -translate-x-1/2 z-20">
         <div className="flex flex-col items-center gap-2 animate-bounce">
           <p className="text-white/60 text-xs uppercase tracking-widest font-medium">Scroll</p>
           <div className="w-6 h-10 border-2 border-white/40 rounded-full flex items-start justify-center p-1.5 backdrop-blur-sm">
             <div className="w-1 h-3 bg-[#da0530] rounded-full animate-pulse shadow-lg shadow-[#da0530]/50"></div>
           </div>
         </div>
-      </div>
+      </div> */}
 
       <style jsx>{`
         @keyframes fade-in {
