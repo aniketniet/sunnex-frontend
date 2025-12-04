@@ -106,7 +106,7 @@ const WhyChooseUsSection = ({ whyChooseUsData, coreValuesData }: WhyChooseUsSect
               className="p-8 bg-white/10 backdrop-blur-sm border-white/20 hover:bg-white/20 transition-all duration-300 hover:-translate-y-2 animate-slide-up"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
-              <div className="bg-[#EF4028] w-12 h-12 rounded-full flex items-center justify-center mb-4 overflow-hidden mx-auto">
+              <div className="bg-[#da0530] w-12 h-12 rounded-full flex items-center justify-center mb-4 overflow-hidden mx-auto">
                 <img 
                   src={reason.image} 
                   alt={reason.title} 
@@ -125,7 +125,7 @@ const WhyChooseUsSection = ({ whyChooseUsData, coreValuesData }: WhyChooseUsSect
           <div className="grid md:grid-cols-2 lg:grid-cols-5 gap-6 text-center">
             {coreValuesToDisplay.map((value, index) => (
               <div key={value.title}>
-                <h4 className="text-xl font-bold text-[#EF4028] mb-2">{value.title}</h4>
+                <h4 className="text-xl font-bold text-[#da0530] mb-2">{value.title}</h4>
                 <p className="text-gray-300 text-sm">
                   {value.description}
                 </p>
