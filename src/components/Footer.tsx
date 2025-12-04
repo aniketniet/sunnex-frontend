@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Facebook, Youtube, Linkedin, Twitter, Instagram, Mail, Phone, MapPin } from "lucide-react";
 import { fetchHomeData, Service } from "@/lib/api";
-import Logo from "/LULLEX.svg";
+import Logo from "/white-logo.svg";
 
 const Footer = () => {
   const [services, setServices] = useState<Service[]>([]);
