@@ -12,23 +12,23 @@ import Autoplay from "embla-carousel-autoplay";
 
 const slides = [
   {
-    video: "https://cdn.pixabay.com/video/2022/03/16/110923-689949643_large.mp4",
+    video: "https://res.cloudinary.com/dk9aclym2/video/upload/v1764849901/SUNNEX_Construction_And_Interior_v1n0cd.mp4",
     title: "Building Your Dreams Into Reality",
     tagline: "LET'S DO IT TOGETHER",
     description: "Full-service contracting and construction company specializing in high-quality building, renovation, maintenance, and interior works."
   },
-  {
-    video: "https://cdn.pixabay.com/video/2024/07/02/219131_large.mp4",
-    title: "Excellence in Construction",
-    tagline: "QUALITY YOU CAN TRUST",
-    description: "Delivering superior workmanship and innovative solutions for residential, commercial, and industrial projects."
-  },
-  {
-    video: "https://cdn.pixabay.com/video/2024/07/04/219337_large.mp4",
-    title: "Your Vision, Our Mission",
-    tagline: "BUILDING TOMORROW TODAY",
-    description: "Licensed professionals committed to on-time, on-budget delivery with 100% customer satisfaction."
-  }
+  // {
+  //   video: "https://cdn.pixabay.com/video/2024/07/02/219131_large.mp4",
+  //   title: "Excellence in Construction",
+  //   tagline: "QUALITY YOU CAN TRUST",
+  //   description: "Delivering superior workmanship and innovative solutions for residential, commercial, and industrial projects."
+  // },
+  // {
+  //   video: "https://cdn.pixabay.com/video/2024/07/04/219337_large.mp4",
+  //   title: "Your Vision, Our Mission",
+  //   tagline: "BUILDING TOMORROW TODAY",
+  //   description: "Licensed professionals committed to on-time, on-budget delivery with 100% customer satisfaction."
+  // }
 ];
 
 const HeroSection = () => {
@@ -72,8 +72,8 @@ const HeroSection = () => {
                     <source src={slide.video} type="video/mp4" />
                   </video>
                   {/* Sophisticated Gradient Overlay */}
-                  <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/80"></div>
-                  <div className="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-black/60"></div>
+                  <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/60 to-black/30"></div>
+                  <div className="absolute inset-0 bg-gradient-to-r from-black/30 via-transparent to-black/40"></div>
                   <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.03),transparent_70%)]"></div>
                 </div>
 
@@ -132,8 +132,8 @@ const HeroSection = () => {
         </CarouselContent>
         
         {/* Elegant Navigation */}
-        <CarouselPrevious className="left-4 md:left-10 h-14 w-14 bg-white/10 backdrop-blur-xl border-white/20 text-white hover:bg-white/20 transition-all duration-300 rounded-full shadow-2xl hover:scale-110" />
-        <CarouselNext className="right-4 md:right-10 h-14 w-14 bg-white/10 backdrop-blur-xl border-white/20 text-white hover:bg-white/20 transition-all duration-300 rounded-full shadow-2xl hover:scale-110" />
+        {/* <CarouselPrevious className="left-4 md:left-10 h-14 w-14 bg-white/10 backdrop-blur-xl border-white/20 text-white hover:bg-white/20 transition-all duration-300 rounded-full shadow-2xl hover:scale-110" /> */}
+        {/* <CarouselNext className="right-4 md:right-10 h-14 w-14 bg-white/10 backdrop-blur-xl border-white/20 text-white hover:bg-white/20 transition-all duration-300 rounded-full shadow-2xl hover:scale-110" /> */}
         
         {/* Slide Indicators */}
         <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 flex gap-3">
