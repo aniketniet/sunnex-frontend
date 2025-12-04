@@ -186,7 +186,7 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
       <header 
         className={`fixed w-full z-50 transition-all duration-300 ${
           isScrolled 
-            ? "bg-white/98 backdrop-blur-xl py-1 shadow-lg" 
+            ? "bg-white shadow-lg py-1" 
             : "bg-white/95 backdrop-blur-md py-2"
         }`}
       >
