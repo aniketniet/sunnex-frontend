@@ -76,7 +76,7 @@ const Index = ({ onDataLoad }: IndexProps) => {
           whyChooseUsData={homeData.data.why_choose_us}
           coreValuesData={homeData.data.our_core_values}
         />
-        <ContactSection contactInfoData={homeData.data.contact_info} />
+        
       </main>
       <Footer />
 

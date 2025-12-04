@@ -1,24 +1,29 @@
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Facebook, Youtube, Linkedin, Twitter, Instagram, Mail, Phone, MapPin } from "lucide-react";
-import { fetchHomeData, Service } from "@/lib/api";
+import { fetchHomeData, Service, ContactInfo } from "@/lib/api";
 import Logo from "/white-logo.svg";
 
 const Footer = () => {
   const [services, setServices] = useState<Service[]>([]);
+  const [contactInfo, setContactInfo] = useState<ContactInfo | null>(null);
   
   useEffect(() => {
-    const loadServices = async () => {
+    const loadData = async () => {
       try {
         const data = await fetchHomeData();
         const servicesData = data.data.services || [];
         setServices(servicesData.slice(0, 4)); // Limit to 4 services maximum
+        
+        if (data.data.contact_info) {
+          setContactInfo(data.data.contact_info);
+        }
       } catch (err) {
-        console.error("Failed to load services:", err);
+        console.error("Failed to load data:", err);
       }
     };
 
-    loadServices();
+    loadData();
   }, []);
 
   const socialLinks = [
@@ -75,7 +80,8 @@ const Footer = () => {
                 <li key={service.id}>
                   <Link
                     to={`/services/${service.id}`}
-                    className="text-primary-foreground/80 hover:text-accent transition-colors text-sm"
+                    onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                    className="text-primary-foreground/80 hover:underline transition-colors text-sm"
                   >
                     {service.heading}
                   </Link>
@@ -93,14 +99,16 @@ const Footer = () => {
                   {link.path.startsWith("/#") ? (
                     <a 
                       href={link.path} 
-                      className="text-primary-foreground/80 hover:text-accent transition-colors text-sm"
+                       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                      className="text-primary-foreground/80 hover:underline transition-colors text-sm"
                     >
                       {link.name}
                     </a>
                   ) : (
                     <Link 
                       to={link.path} 
-                      className="text-primary-foreground/80 hover:text-accent transition-colors text-sm"
+                       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+                      className="text-primary-foreground/80 hover:underline transition-colors text-sm"
                     >
                       {link.name}
                     </Link>
@@ -108,7 +116,7 @@ const Footer = () => {
                 </li>
               ))}
               <li>
-                <Link to="/terms" className="text-primary-foreground/80 hover:text-accent transition-colors text-sm">
+                <Link to="/terms"  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })} className="text-primary-foreground/80 hover:underline transition-colors text-sm">
                   Terms & Conditions
                 </Link>
               </li>
@@ -120,18 +128,22 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-4">Contact Us</h3>
             <ul className="space-y-3">
               <li className="flex items-start space-x-3">
-                <MapPin size={20} className="text-accent mt-1 flex-shrink-0" />
+                <MapPin size={20} className="text-white mt-1 flex-shrink-0" />
                 <span className="text-primary-foreground/80 text-sm">
-                  401, Jumbo Building, Bur Dubai, UAE
+                  {contactInfo?.address || "401, Jumbo Building, Bur Dubai, UAE"}
                 </span>
               </li>
               <li className="flex items-center space-x-3">
-                <Phone size={20} className="text-accent flex-shrink-0" />
-                <span className="text-primary-foreground/80 text-sm">+971 569335833</span>
+                <Phone size={20} className="text-white flex-shrink-0" />
+                <span className="text-primary-foreground/80 text-sm">
+                  {contactInfo?.mobile_number || "+971 569335833"}
+                </span>
               </li>
               <li className="flex items-center space-x-3">
-                <Mail size={20} className="text-accent flex-shrink-0" />
-                <span className="text-primary-foreground/80 text-sm">info@sunnex.gulf</span>
+                <Mail size={20} className="text-white flex-shrink-0" />
+                <span className="text-primary-foreground/80 text-sm">
+                  {contactInfo?.email || "info@sunnex.gulf"}
+                </span>
               </li>
             </ul>
           </div>

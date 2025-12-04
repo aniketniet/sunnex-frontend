@@ -115,7 +115,7 @@ const ServicesSection = ({ services }: ServicesSectionProps) => {
                   alt={service.title}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div>
+                {/* <div className="absolute inset-0 bg-gradient-to-t from-primary/80 to-transparent"></div> */}
                 <div className="absolute bottom-4 left-4">
                   <div className="bg-accent p-3 rounded-full">
                     <service.icon className="text-accent-foreground" size={24} />
@@ -125,7 +125,7 @@ const ServicesSection = ({ services }: ServicesSectionProps) => {
               <div className="p-6">
                 <h3 className="text-2xl font-bold text-foreground mb-3">{service.title}</h3>
                 <p className="text-muted-foreground mb-4">{service.description}</p>
-                <Link to={`/services/${service.id}`}>
+                <Link to={`/services/${service.id}`}  onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}>
                   <Button variant="link" className="p-0 h-auto text-accent hover:text-accent/80">
                     Learn More
                     <ArrowRight className="ml-2" size={16} />

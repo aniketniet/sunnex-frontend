@@ -94,14 +94,14 @@ const YouTubeSection = ({ projects }: YouTubeSectionProps) => {
     : youtubeVideos;
 
   return (
-    <section className="py-24 bg-gradient-to-b from-background via-secondary/20 to-background relative overflow-hidden">
+    <section className="py-24  relative overflow-hidden">
       {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-5">
+      {/* <div className="absolute inset-0 opacity-5">
         <div className="absolute inset-0" style={{
           backgroundImage: 'radial-gradient(circle at 2px 2px, hsl(var(--primary)) 1px, transparent 0)',
           backgroundSize: '40px 40px'
         }}></div>
-      </div>
+      </div> */}
 
       <div className="container mx-auto px-4 relative z-10">
         <div className="text-center mb-16 space-y-4 animate-fade-in">

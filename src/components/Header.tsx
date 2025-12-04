@@ -86,6 +86,10 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
 
     if (!isHash) {
       // For React Router links, just navigate
+      // Scroll to top after navigation
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }, 0);
       return;
     }
 
@@ -94,6 +98,9 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
     if (path === "#home" || path === "/") {
       if (location.pathname !== "/") {
         window.location.href = "/";
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }, 0);
       } else {
         window.scrollTo({ top: 0, behavior: "smooth" });
       }
@@ -101,6 +108,9 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
       // If we're not on the home page, navigate to home first, then scroll
       if (location.pathname !== "/") {
         window.location.href = `/${path}`;
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        }, 0);
       } else {
         // We're on home page, just scroll to the section
         const element = document.querySelector(path);
@@ -235,6 +245,7 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
                                   onClick={() => {
                                     setIsServicesDropdownOpen(false);
                                     setHoveredCategory(null);
+                                    window.scrollTo({ top: 0, behavior: "smooth" });
                                     if (hoverTimeoutRef.current) {
                                       clearTimeout(hoverTimeoutRef.current);
                                     }
@@ -337,6 +348,7 @@ const Header = ({ onOpenContactModal }: HeaderProps) => {
                               {category.services.map((service) => (
                                 <Link
                                   key={service.id}
+                                  
                                   to={`/services/${service.id}`}
                                   onClick={() => {
                                     setIsMobileServicesOpen(false);

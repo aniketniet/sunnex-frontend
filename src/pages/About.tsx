@@ -166,7 +166,7 @@ const About = () => {
     ? aboutData.image.substring(1)
     : aboutData.image;
 
-  const imageUrl = `https://shopninja.in/pioneerv2/public/storage/${imagePath}`;
+  const imageUrl = `http://sunnexgulf.com/admin/public/storage/${imagePath}`;
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -179,7 +179,7 @@ const About = () => {
             alt="About Sunnex Technical Works"
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-primary/60"></div>
+          <div className="absolute inset-0 bg-black/60"></div>
           <div className="relative z-10 container mx-auto px-4 text-center animate-fade-in pt-24">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4">
               About Us
@@ -297,7 +297,7 @@ const About = () => {
         </section>
 
         {/* CTA Section */}
-        <section className="py-24 bg-gradient-to-r from-primary to-primary/80">
+        <section className="py-24 bg-gradient-to-r from-primary to-primary/100">
           <div className="container mx-auto px-4">
             <div className="max-w-4xl mx-auto text-center animate-slide-up">
               <h2 className="text-3xl md:text-4xl font-bold text-primary-foreground mb-6">
@@ -310,7 +310,7 @@ const About = () => {
                 <Link to="/contact">
                   <Button
                     size="lg"
-                    className="bg-accent text-accent-foreground hover:bg-accent/90 font-semibold px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+                    className="bg-transparent border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 font-semibold px-8 py-6 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
                   >
                     Get in Touch
                   </Button>

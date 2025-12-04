@@ -106,7 +106,7 @@ const Services = () => {
   const imageUrl = `${imagePath}`;
 
   // Create full URL for hero background
-  const heroImageUrl = `https://shopninja.in/pioneerv2/public/storage/${imagePath}`;
+  const heroImageUrl = `http://sunnexgulf.com/admin/public/storage/${imagePath}`;
 
   return (
     <div className="min-h-screen flex flex-col">
@@ -119,7 +119,7 @@ const Services = () => {
             alt={service.heading}
             className="absolute inset-0 w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-primary/60"></div>
+          <div className="absolute inset-0 bg-black/60"></div>
           <div className="relative z-10 container mx-auto px-4 text-center animate-fade-in pt-24">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4">
               {service.heading}
@@ -176,7 +176,7 @@ const Services = () => {
                   </p>
                   <Button
                     size="lg"
-                    className="w-full sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90 text-lg px-8 py-6 h-auto shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all"
+                    className="w-full sm:w-auto bg-accent text-accent-foreground hover:bg-accent/90 text-lg px-8 py-4 h-auto shadow-lg hover:shadow-xl hover:-translate-y-1 transition-all"
                     onClick={() => setIsContactModalOpen(true)}
                   >
                     Request a Quote

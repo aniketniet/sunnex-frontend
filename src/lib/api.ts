@@ -1,4 +1,4 @@
-const API_BASE_URL = 'https://shopninja.in/pioneerv2/public/api';
+const API_BASE_URL = 'http://sunnexgulf.com/admin/public/api';
 
 export interface Project {
   id: number;

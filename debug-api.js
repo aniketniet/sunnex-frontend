@@ -1,4 +1,4 @@
-fetch('https://shopninja.in/pioneerv2/public/api/home-data')
+fetch('http://sunnexgulf.com/admin/public/api/home-data')
   .then(response => response.json())
   .then(data => {
     console.log('Services structure:');

@@ -55,7 +55,7 @@ const Contact = () => {
     const imagePath = aboutData.image.startsWith('/')
         ? aboutData.image.substring(1)
         : aboutData.image;
-    const imageUrl = `https://shopninja.in/pioneerv2/public/storage/${imagePath}`;
+    const imageUrl = `http://sunnexgulf.com/admin/public/storage/${imagePath}`;
 
     return (
         <div className="min-h-screen flex flex-col">
@@ -68,7 +68,7 @@ const Contact = () => {
                         alt="Contact Sunnex Technical Works"
                         className="absolute inset-0 w-full h-full object-cover"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-r from-primary/90 via-primary/70 to-primary/60"></div>
+                    <div className="absolute inset-0 bg-black/60"></div>
                     <div className="relative z-10 container mx-auto px-4 text-center animate-fade-in pt-24">
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-primary-foreground mb-4">
                             Contact Us

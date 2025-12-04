@@ -166,7 +166,7 @@ const Terms = () => {
                     </p>
                     <Button 
                       size="lg" 
-                      className="bg-accent text-accent-foreground hover:bg-accent/90 text-lg px-10 py-6 shadow-2xl hover:shadow-accent/50 transition-all duration-300 hover:scale-105"
+                      className="bg-transparent border-2 border-primary-foreground text-primary-foreground hover:bg-primary-foreground/10 text-lg px-10 py-6 shadow-2xl hover:shadow-accent/50 transition-all duration-300 hover:scale-105"
                       onClick={() => {}}
                     >
                       Get In Touch
