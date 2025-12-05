@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://sunnexgulf.com/admin/public/api';
+const API_BASE_URL = 'https://sunnexgulf.com/admin/public/api';
 
 export interface Project {
   id: number;

@@ -106,7 +106,7 @@ const Services = () => {
   const imageUrl = `${imagePath}`;
 
   // Create full URL for hero background
-  const heroImageUrl = `http://sunnexgulf.com/admin/public/storage/${imagePath}`;
+  const heroImageUrl = `https://sunnexgulf.com/admin/public/storage/${imagePath}`;
 
   return (
     <div className="min-h-screen flex flex-col">

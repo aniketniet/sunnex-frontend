@@ -166,7 +166,7 @@ const About = () => {
     ? aboutData.image.substring(1)
     : aboutData.image;
 
-  const imageUrl = `http://sunnexgulf.com/admin/public/storage/${imagePath}`;
+  const imageUrl = `https://sunnexgulf.com/admin/public/storage/${imagePath}`;
 
   return (
     <div className="min-h-screen flex flex-col">
