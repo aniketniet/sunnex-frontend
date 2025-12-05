@@ -69,13 +69,14 @@ const Index = ({ onDataLoad }: IndexProps) => {
       <main>
         <HeroSection />
         <ServicesSection services={homeData.data.services} />
-        <InfiniteMarquee brands={homeData.data.brands} />
+        
         <YouTubeSection projects={homeData.data.projects} />
         <ClientsSection testimonials={homeData.data.testimonials} />
         <WhyChooseUsSection
           whyChooseUsData={homeData.data.why_choose_us}
           coreValuesData={homeData.data.our_core_values}
         />
+        <InfiniteMarquee brands={homeData.data.brands} />
         
       </main>
       <Footer />
